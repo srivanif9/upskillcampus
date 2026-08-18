@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Media Library</title>
+
+<link rel="stylesheet" href="/css/media.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Media Library</h1>
+
+<br>
+
+<form
+action="/media/upload"
+method="POST"
+enctype="multipart/form-data">
+
+<input
+type="file"
+name="media"
+required>
+
+<button type="submit">
+
+Upload
+
+</button>
+
+</form>
+
+<br>
+
+<form
+action="/media"
+method="GET">
+
+<input
+type="text"
+name="search"
+placeholder="Search images..."
+value="<%= search %>">
+
+<button>
+
+Search
+
+</button>
+
+</form>
+<form
+action="/media/delete-selected"
+method="POST"
+onsubmit="return confirm('Delete selected images?')">
+
+<div class="gallery">
+
+<% media.forEach(file=>{ %>
+
+<div class="card">
+
+<input
+type="checkbox"
+name="selectedMedia"
+value="<%= file.id %>">
+
+<br><br>
+
+<a href="/media/view/<%= file.id %>">
+
+<img
+src="<%= file.file_path %>"
+class="media-thumb">
+
+</a>
+
+<p>
+
+<%= file.file_name %>
+
+</p>
+
+<a href="/media/view/<%= file.id %>">
+
+<button type="button">
+
+View
+
+</button>
+
+</a>
+
+<a
+href="/media/delete/<%= file.id %>"
+onclick="return confirm('Delete this image?')">
+
+<button type="button">
+
+Delete
+
+</button>
+
+</a>
+
+</div>
+
+<% }) %>
+
+</div>
+
+<br>
+
+<button type="submit">
+
+Delete Selected
+
+</button>
+
+</form>
+</body>
+
+</html>

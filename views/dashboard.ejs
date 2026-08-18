@@ -1,0 +1,132 @@
+<%- include("partials/header") %>
+
+<%- include("partials/sidebar") %>
+
+<div class="main">
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <h2>Dashboard</h2>
+
+        <div>
+            Welcome,
+            <b><%= user.username %></b>
+        </div>
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="dashboard-header">
+
+        <h1>
+            Welcome, <%= user.username %> 👋
+        </h1>
+
+        <p>
+            Manage your CMS Blog Builder from one place.
+        </p>
+
+    </div>
+
+    <!-- Quick Actions -->
+
+    <div class="quick-actions">
+
+        <a href="/blogs/create">
+            <button>Create Blog</button>
+        </a>
+
+        <a href="/media">
+            <button>Media Library</button>
+        </a>
+
+        <a href="/pages">
+            <button>Pages</button>
+        </a>
+
+        <a href="/builder">
+            <button>Page Builder</button>
+        </a>
+
+        <a href="/profile">
+            <button>Profile</button>
+        </a>
+
+    </div>
+
+    <!-- Statistics Cards -->
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Pages</h3>
+            <p><%= stats.pages %></p>
+        </div>
+
+        <div class="card">
+            <h3>Blog Posts</h3>
+            <p><%= stats.blogs %></p>
+        </div>
+
+        <div class="card">
+            <h3>Media Files</h3>
+            <p><%= stats.media %></p>
+        </div>
+
+        
+
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="content">
+
+        <h2>Welcome to CMS Blog Builder</h2>
+
+        <br>
+
+        <p>
+            Use the sidebar to manage your website pages, create blog posts,
+            upload media, organize content, customize your website,
+            and publish pages using the drag-and-drop page builder.
+        </p>
+
+        <br>
+
+        <h3>Completed Features</h3>
+
+        <ul>
+
+            <li>✅ User Authentication</li>
+            <li>✅ Dashboard</li>
+            <li>✅ Drag-and-Drop Page Builder</li>
+            <li>✅ Pages Management</li>
+            <li>✅ Blog Management</li>
+            <li>✅ Rich Text Editor (CKEditor)</li>
+            <li>✅ Media Library</li>
+            <li>✅ User Profile Management</li>
+            <li>✅ Search & Pagination</li>
+            <li>✅ Website Settings</li>
+            <li>✅ Activity Log</li>
+
+        </ul>
+
+        <br>
+
+        <h3>Upcoming Features</h3>
+
+        <ul>
+
+            <li>🔹 Publish Website</li>
+            <li>🔹 Preview Pages</li>
+            <li>🔹 Dashboard Charts</li>
+            <li>🔹 Visitor Analytics</li>
+            <li>🔹 Theme Customization</li>
+            <li>🔹 User Roles (Admin / Editor)</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<%- include("partials/footer") %>

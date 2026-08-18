@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title><%= page.page_name %></title>
+
+<link rel="stylesheet" href="/css/public.css">
+
+</head>
+
+<body>
+
+<% layout.forEach(item => { %>
+
+    <% if(item.type === "heading"){ %>
+
+        <h1><%= item.text %></h1>
+
+    <% } %>
+
+    <% if(item.type === "paragraph"){ %>
+
+        <p><%= item.text %></p>
+
+    <% } %>
+
+    <% if(item.type === "button"){ %>
+
+        <button><%= item.text %></button>
+
+    <% } %>
+
+    <% if(item.type === "image"){ %>
+
+        <img
+        src="<%= item.src %>"
+        style="max-width:100%;">
+
+    <% } %>
+
+    <% if(item.type === "divider"){ %>
+
+        <hr>
+
+    <% } %>
+
+    <% if(item.type === "spacer"){ %>
+
+        <div style="height:40px;"></div>
+
+    <% } %>
+
+<% }) %>
+<a href="/builder">
+    <button type="button">
+        ← Back to Page Builder
+    </button>
+</a>
+</body>
+
+</html>

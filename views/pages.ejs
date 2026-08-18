@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Pages</title>
+
+<link rel="stylesheet" href="/css/dashboard.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>My Pages</h1>
+
+<br>
+
+<a href="/builder">
+
+<button>Create New Page</button>
+
+</a>
+
+<br><br>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+<th>ID</th>
+
+<th>Page Name</th>
+
+<th>Created</th>
+
+<th>Action</th>
+
+</tr>
+
+<% pages.forEach(page=>{ %>
+
+<tr>
+
+<td><%= page.id %></td>
+
+<td><%= page.page_name %></td>
+
+<td>
+
+<%= new Date(page.created_at).toLocaleDateString() %>
+
+</td>
+
+<td>
+
+<a href="/builder?page=<%= page.id %>">
+
+<button>Edit</button>
+
+</a>
+
+</td>
+
+</tr>
+
+<% }) %>
+
+</table>
+
+</div>
+
+</body>
+
+</html>

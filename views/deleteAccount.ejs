@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Delete Account</title>
+
+    <link rel="stylesheet"
+          href="/css/profile.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Delete Account</h1>
+
+    <p>
+        This action will permanently delete your account
+        and your account-related data.
+    </p>
+
+    <p>
+        <strong>This action cannot be undone.</strong>
+    </p>
+
+    <form
+        action="/profile/delete"
+        method="POST">
+
+        <label>
+            Current Password
+        </label>
+
+        <input
+            type="password"
+            name="currentPassword"
+            required>
+
+        <br><br>
+
+        <label>
+            Type DELETE to confirm
+        </label>
+
+        <input
+            type="text"
+            name="confirmation"
+            placeholder="DELETE"
+            required>
+
+        <br><br>
+
+        <button
+            type="submit"
+            onclick="return confirm('Are you absolutely sure you want to permanently delete your account?');">
+
+            Permanently Delete Account
+
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/profile">
+
+        <button type="button">
+            Cancel
+        </button>
+
+    </a>
+
+</div>
+
+</body>
+
+</html>

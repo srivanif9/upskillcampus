@@ -1,0 +1,53 @@
+<%- include("partials/header") %>
+
+<%- include("partials/sidebar") %>
+
+<div class="main">
+
+<h1>Activity Log</h1>
+
+<br>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+<th>User</th>
+
+<th>Activity</th>
+
+<th>Date</th>
+
+</tr>
+
+<% logs.forEach(log=>{ %>
+
+<tr>
+
+<td>
+
+<%= log.username %>
+
+</td>
+
+<td>
+
+<%= log.activity %>
+
+</td>
+
+<td>
+
+<%= new Date(log.created_at).toLocaleString() %>
+
+</td>
+
+</tr>
+
+<% }) %>
+
+</table>
+
+</div>
+
+<%- include("partials/footer") %>

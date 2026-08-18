@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Messages</title>
+
+    <link rel="stylesheet" href="/css/dashboard.css">
+
+</head>
+
+<body>
+
+<%- include("partials/header") %>
+
+<%- include("partials/sidebar") %>
+
+<div class="main">
+
+    <div class="topbar">
+
+        <h2>Contact Messages</h2>
+
+        <div>
+            Welcome, <b><%= user.username %></b>
+        </div>
+
+    </div>
+
+    <div class="content">
+
+        <h1>Contact Messages</h1>
+
+        <br>
+
+        <% if (!contacts || contacts.length === 0) { %>
+
+            <p>No contact messages found.</p>
+
+        <% } else { %>
+
+            <table border="1" cellpadding="10" cellspacing="0" width="100%">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Subject</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <% contacts.forEach(contact => { %>
+
+                        <tr>
+
+                            <td><%= contact.id %></td>
+
+                            <td><%= contact.name %></td>
+
+                            <td><%= contact.email %></td>
+
+                            <td><%= contact.subject %></td>
+
+                            <td>
+                                <%= contact.is_read || "No" %>
+                            </td>
+
+                            <td>
+                                <%= contact.created_at %>
+                            </td>
+
+                            <td>
+
+                                <a href="/contacts/<%= contact.id %>">
+                                    View
+                                </a>
+
+                                &nbsp; | &nbsp;
+
+                                <a href="/contacts/read/<%= contact.id %>">
+                                    Mark Read
+                                </a>
+
+                                &nbsp; | &nbsp;
+
+                                <a
+                                    href="/contacts/delete/<%= contact.id %>"
+                                    onclick="return confirm('Delete this message?');"
+                                >
+                                    Delete
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    <% }) %>
+
+                </tbody>
+
+            </table>
+
+        <% } %>
+
+    </div>
+
+</div>
+
+<%- include("partials/footer") %>
+
+</body>
+
+</html>

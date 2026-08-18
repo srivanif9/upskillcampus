@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Edit Blog</title>
+
+<link rel="stylesheet" href="/css/blog.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Edit Blog</h1>
+
+<form
+action="/blogs/edit/<%= blog.id %>"
+method="POST"
+enctype="multipart/form-data">
+
+<label>Title</label>
+
+<input
+type="text"
+id="title"
+name="title"
+value="<%= blog.title %>"
+required>
+
+<br><br>
+
+<label>Slug</label>
+
+<input
+type="text"
+id="slug"
+name="slug"
+value="<%= blog.slug %>"
+required>
+
+<br><br>
+
+<label>Category</label>
+
+<input
+type="text"
+name="category"
+value="<%= blog.category %>">
+
+<br><br>
+
+<label>Tags</label>
+
+<input
+type="text"
+name="tags"
+value="<%= blog.tags %>">
+
+<br><br>
+
+<input
+type="hidden"
+name="oldImage"
+value="<%= blog.featured_image %>">
+
+<label>Change Featured Image</label>
+
+<input
+type="file"
+name="featuredImage"
+accept="image/*">
+
+<br><br>
+
+<hr>
+
+<h3>Choose From Media Library</h3>
+
+<button
+type="button"
+id="openMedia">
+
+Media Library
+
+</button>
+
+<input
+type="hidden"
+id="selectedImage"
+name="selectedImage"
+value="<%= blog.featured_image %>">
+
+<div id="selectedPreview">
+
+<% if(blog.featured_image){ %>
+
+<h4>Current Image</h4>
+
+<img
+src="<%= blog.featured_image %>"
+style="width:200px;border-radius:8px;">
+
+<% } %>
+
+</div>
+
+<br><br>
+
+<label>Content</label>
+
+<textarea
+id="editor"
+name="content"><%- blog.content %></textarea>
+
+<br><br>
+
+<label>Status</label>
+
+<select name="status">
+
+<option
+value="Draft"
+<%= blog.status==="Draft" ? "selected" : "" %>>
+
+Draft
+
+</option>
+
+<option
+value="Published"
+<%= blog.status==="Published" ? "selected" : "" %>>
+
+Published
+
+</option>
+
+</select>
+
+<br><br>
+
+<button type="submit">
+
+Update Blog
+
+</button>
+
+</form>
+
+</div>
+
+<!-- Media Library Modal -->
+
+<div
+id="mediaModal"
+class="preview-modal"
+style="display:none;">
+
+<div
+class="preview-content">
+
+<h2>
+
+Media Library
+
+</h2>
+
+<div id="mediaGallery">
+
+Loading...
+
+</div>
+
+<br>
+
+<button
+type="button"
+id="closeMedia">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<!-- CKEditor -->
+
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+<script>
+
+let editor;
+
+ClassicEditor
+.create(
+document.querySelector("#editor")
+)
+.then(newEditor=>{
+
+editor = newEditor;
+
+})
+.catch(error=>{
+
+console.error(error);
+
+});
+
+</script>
+
+<!-- Media Library -->
+
+<script>
+
+const mediaModal = document.getElementById("mediaModal");
+
+const mediaGallery = document.getElementById("mediaGallery");
+
+const openMedia = document.getElementById("openMedia");
+
+const closeMedia = document.getElementById("closeMedia");
+
+openMedia.addEventListener("click", async function(){
+
+mediaModal.style.display="flex";
+
+const response = await fetch("/media/list");
+
+const media = await response.json();
+
+let html="";
+
+media.forEach(file=>{
+
+html += `
+<img
+src="${file.file_path}"
+class="media-thumb"
+style="width:120px;margin:10px;cursor:pointer;border-radius:8px;"
+onclick="selectMedia('${file.file_path}')">
+`;
+
+});
+
+mediaGallery.innerHTML = html;
+
+});
+
+closeMedia.addEventListener("click",function(){
+
+mediaModal.style.display="none";
+
+});
+
+function selectMedia(path){
+
+document.getElementById("selectedImage").value = path;
+
+document.getElementById("selectedPreview").innerHTML = `
+<h4>Selected Image</h4>
+
+<img
+src="${path}"
+style="width:200px;border-radius:8px;">
+`;
+
+mediaModal.style.display="none";
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Media Details</title>
+
+<link rel="stylesheet" href="/css/media.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Media Details</h1>
+
+<img
+src="<%= media.file_path %>"
+style="width:500px;border-radius:10px;">
+
+<br><br>
+
+<p>
+
+<b>File Name:</b>
+
+<%= media.file_name %>
+
+</p>
+
+<p>
+
+<b>URL:</b>
+
+<input
+type="text"
+id="url"
+value="<%= media.file_path %>"
+readonly
+style="width:100%;">
+
+</p>
+
+<p>
+
+<b>Uploaded:</b>
+
+<%= media.uploaded_at %>
+
+</p>
+
+<button onclick="copyURL()">
+
+Copy URL
+
+</button>
+
+<% if(blogs.length===0){ %>
+
+<a href="/media/delete/<%= media.id %>">
+
+<button>
+
+Delete
+
+</button>
+
+</a>
+
+<% }else{ %>
+
+<button disabled>
+
+Image In Use
+
+</button>
+
+<% } %>
+
+<br><br>
+
+<hr>
+
+<h3>
+
+Used In
+
+</h3>
+
+<% if(blogs.length===0){ %>
+
+<p>
+
+This image is not used in any blog.
+
+</p>
+
+<% }else{ %>
+
+<ul>
+
+<% blogs.forEach(blog=>{ %>
+
+<li>
+
+<%= blog.title %>
+
+</li>
+
+<% }) %>
+
+</ul>
+
+<% } %>
+
+<br>
+
+<a href="/media">
+
+<button>
+
+Back
+
+</button>
+
+</a>
+
+</div>
+
+<script>
+
+function copyURL(){
+
+    navigator.clipboard.writeText(
+        location.origin +
+        document.getElementById("url").value
+    );
+
+    alert("URL Copied");
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Profile</title>
+
+<link rel="stylesheet" href="/css/profile.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>My Profile</h1>
+
+<% if(user.image){ %>
+
+<img
+src="<%= user.image %>"
+style="width:150px;height:150px;border-radius:50%;">
+
+<% } %>
+
+<br><br>
+
+<p>
+
+<b>Username:</b>
+
+<%= user.username %>
+
+</p>
+
+<p>
+
+<b>Email:</b>
+
+<%= user.email %>
+
+</p>
+
+<br>
+
+<a href="/profile/edit">
+
+<button>
+
+Edit Profile
+
+</button>
+
+</a>
+
+<a href="/profile/password">
+
+<button>
+
+Change Password
+
+</button>
+
+</a>
+
+</div>
+
+</body>
+
+</html>

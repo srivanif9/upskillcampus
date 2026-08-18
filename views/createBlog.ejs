@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Create Blog</title>
+
+<link rel="stylesheet" href="/css/blog.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Create Blog Post</h1>
+
+<a href="/blogs">
+<button type="button">
+← Back to Blogs
+</button>
+</a>
+
+<br><br>
+
+<form
+action="/blogs/create"
+method="POST"
+enctype="multipart/form-data">
+
+<label>Blog Title</label>
+
+<input
+type="text"
+id="title"
+name="title"
+required>
+
+<br><br>
+
+<label>Slug</label>
+
+<input
+type="text"
+id="slug"
+name="slug"
+required>
+
+<br><br>
+
+<label>Category</label>
+
+<input
+type="text"
+name="category">
+
+<br><br>
+
+<label>Tags</label>
+
+<input
+type="text"
+name="tags">
+
+<br><br>
+
+<label>Featured Image</label>
+
+<input
+type="file"
+name="featuredImage"
+accept="image/*">
+
+<br><br>
+
+<hr>
+
+<h3>Choose From Media Library</h3>
+
+<button
+type="button"
+id="openMedia">
+
+Media Library
+
+</button>
+
+<input
+type="hidden"
+name="selectedImage"
+id="selectedImage">
+
+<div id="selectedPreview"></div>
+
+<br>
+
+<label>Blog Content</label>
+
+<textarea
+id="editor"
+name="content"></textarea>
+
+<br><br>
+
+<label>Status</label>
+
+<select name="status">
+
+<option value="Draft">
+
+Draft
+
+</option>
+
+<option value="Published">
+
+Published
+
+</option>
+
+</select>
+
+<br><br>
+
+<button type="button" id="previewBtn">
+
+Preview
+
+</button>
+
+<button type="submit">
+
+Save Blog
+
+</button>
+
+</form>
+
+</div>
+
+<!-- Preview Modal -->
+
+<div
+id="previewModal"
+class="preview-modal">
+
+<div class="preview-content">
+
+<h2 id="previewTitle"></h2>
+
+<p>
+
+<strong>Category:</strong>
+
+<span id="previewCategory"></span>
+
+</p>
+
+<hr>
+
+<div id="previewBody"></div>
+
+<br>
+
+<button id="closePreview">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<!-- Media Library Modal -->
+
+<div
+id="mediaModal"
+class="preview-modal">
+
+<div class="preview-content">
+
+<h2>
+
+Media Library
+
+</h2>
+
+<div id="mediaGallery">
+
+Loading...
+
+</div>
+
+<br>
+
+<button
+id="closeMedia">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<!-- CKEditor -->
+
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+<script>
+let editor;
+
+ClassicEditor
+.create(
+    document.querySelector("#editor"),
+    {
+        simpleUpload:{
+            uploadUrl:"/editor/upload"
+        }
+    }
+)
+.then(newEditor=>{
+    editor=newEditor;
+})
+.catch(error=>{
+    console.error(error);
+});
+</script>
+<script>
+document.querySelector("form").addEventListener("submit", function () {
+    document.querySelector("#editor").value = editor.getData();
+});
+</script>
+<!-- Auto Slug -->
+
+<script>
+
+const title=document.getElementById("title");
+
+const slug=document.getElementById("slug");
+
+title.addEventListener("keyup",function(){
+
+slug.value=title.value
+
+.toLowerCase()
+
+.trim()
+
+.replace(/[^a-z0-9]+/g,"-")
+
+.replace(/^-|-$/g,"");
+
+});
+
+</script>
+
+<!-- Preview -->
+
+<script>
+
+const previewModal=document.getElementById("previewModal");
+
+document.getElementById("previewBtn").onclick=function(){
+
+document.getElementById("previewTitle").innerText=
+
+document.getElementById("title").value;
+
+document.getElementById("previewCategory").innerText=
+
+document.querySelector("[name='category']").value;
+
+document.getElementById("previewBody").innerHTML=
+
+editor.getData();
+
+previewModal.style.display="flex";
+
+};
+
+document.getElementById("closePreview").onclick=function(){
+
+previewModal.style.display="none";
+
+};
+
+</script>
+
+<!-- Media Library -->
+
+<script>
+
+const mediaModal=document.getElementById("mediaModal");
+
+document.getElementById("openMedia").onclick=async function(){
+
+mediaModal.style.display="flex";
+
+const response=await fetch("/media/list");
+
+const media=await response.json();
+
+let html="";
+
+media.forEach(file=>{
+
+html+=`
+
+<img
+
+src="${file.file_path}"
+
+class="media-thumb"
+
+onclick="selectMedia('${file.file_path}')">
+
+`;
+
+});
+
+document.getElementById("mediaGallery").innerHTML=html;
+
+};
+
+document.getElementById("closeMedia").onclick=function(){
+
+mediaModal.style.display="none";
+
+};
+
+function selectMedia(path){
+
+document.getElementById("selectedImage").value=path;
+
+document.getElementById("selectedPreview").innerHTML=`
+
+<h4>Selected Image</h4>
+
+<img
+
+src="${path}"
+
+style="width:200px;border-radius:8px;">
+
+`;
+
+mediaModal.style.display="none";
+
+}
+
+</script>
+
+</body>
+
+</html>

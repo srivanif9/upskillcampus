@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CMS Page Builder</title>
+
+<link rel="stylesheet" href="/css/builder.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="builder-container">
+
+    <!-- Left Sidebar -->
+
+    <aside class="sidebar">
+
+        <h2>Components</h2>
+
+        <div class="component" draggable="true" data-type="heading">
+            📝 Heading
+        </div>
+
+        <div class="component" draggable="true" data-type="paragraph">
+            📄 Paragraph
+        </div>
+
+        <div class="component" draggable="true" data-type="button">
+            🔘 Button
+        </div>
+
+        <div class="component" draggable="true" data-type="image">
+            🖼 Image
+        </div>
+
+        <div class="component" draggable="true" data-type="divider">
+            ➖ Divider
+        </div>
+
+        <div class="component" draggable="true" data-type="spacer">
+            ⬜ Spacer
+        </div>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main-area">
+
+        <!-- Toolbar -->
+
+        <div class="toolbar">
+
+            <h2>Page Builder</h2>
+
+            <div>
+                <button id="newBtn">📄 New</button>
+                <button id="loadBtn">📂 Load</button>
+                <button id="saveBtn">💾 Save</button>
+
+                <button id="previewBtn">👁 Preview</button>
+
+                <button id="publishBtn">🚀 Publish</button>
+
+            </div>
+
+        </div>
+
+        <!-- Canvas -->
+
+        <div id="canvas">
+
+            <div class="empty-message">
+
+                Drag components here
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Properties -->
+
+    <aside class="properties">
+
+        <h2>Properties</h2>
+
+        <p>
+
+        Select a component to edit.
+
+        </p>
+
+    </aside>
+
+</div>
+
+<script src="/js/builder/components.js"></script>
+
+<script src="/js/builder/controls.js"></script>
+
+<script src="/js/builder/properties.js"></script>
+
+<script src="/js/builder/builder.js"></script>
+
+</body>
+
+</html>

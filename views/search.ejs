@@ -1,0 +1,87 @@
+<%- include("partials/header") %>
+
+<%- include("partials/sidebar") %>
+
+<div class="main">
+
+<h1>Global Search</h1>
+
+<br>
+
+<form action="/search/results">
+
+<input
+
+type="text"
+
+name="keyword"
+
+placeholder="Search pages, blogs, media..."
+
+value="<%= keyword %>">
+
+<button>
+
+Search
+
+</button>
+
+</form>
+
+<br>
+
+<h2>Pages</h2>
+
+<ul>
+
+<% pages.forEach(page=>{ %>
+
+<li>
+
+<%= page.page_name %>
+
+</li>
+
+<% }) %>
+
+</ul>
+
+<br>
+
+<h2>Blogs</h2>
+
+<ul>
+
+<% blogs.forEach(blog=>{ %>
+
+<li>
+
+<%= blog.title %>
+
+</li>
+
+<% }) %>
+
+</ul>
+
+<br>
+
+<h2>Media</h2>
+
+<ul>
+
+<% media.forEach(file=>{ %>
+
+<li>
+
+<%= file.file_name %>
+
+</li>
+
+<% }) %>
+
+</ul>
+
+</div>
+
+<%- include("partials/footer") %>

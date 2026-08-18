@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Comments</title>
+
+<link rel="stylesheet" href="/css/blog.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Comments</h1>
+
+<br>
+
+<table border="1" cellpadding="10" cellspacing="0" width="100%">
+
+<tr>
+
+<th>ID</th>
+
+<th>Blog</th>
+
+<th>Name</th>
+
+<th>Email</th>
+
+<th>Comment</th>
+
+<th>Status</th>
+
+<th>Actions</th>
+
+</tr>
+
+<% comments.forEach(comment=>{ %>
+
+<tr>
+
+<td><%= comment.id %></td>
+
+<td><%= comment.title %></td>
+
+<td><%= comment.name %></td>
+
+<td><%= comment.email %></td>
+
+<td><%= comment.comment %></td>
+
+<td><%= comment.status %></td>
+
+<td>
+
+<% if(comment.status==="Pending"){ %>
+
+<a href="/comments/approve/<%= comment.id %>">
+
+<button>
+
+Approve
+
+</button>
+
+</a>
+
+<% } %>
+
+<a
+href="/comments/delete/<%= comment.id %>"
+onclick="return confirm('Delete this comment?')">
+
+<button>
+
+Delete
+
+</button>
+
+</a>
+
+</td>
+
+</tr>
+
+<% }) %>
+
+</table>
+
+</div>
+
+</body>
+
+</html>
